@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microorganism Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <button onclick="window.location.href='main.html'">Back</button>
+        <button onclick="window.location.href='index.html'">Add</button>
+        <button onclick="window.location.href='main.html'">View</button>
+    </header>
+    <h1>Microorganism Details</h1>
+
+    <div id="microorganismDetails"></div>
+
+    <script>
+        // Function to get the microorganism name from the URL parameter
+        function getMicroorganismName() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('name');
+        }
+
+        // Retrieve microorganism data from local storage
+        const microorganisms = JSON.parse(localStorage.getItem('microorganisms')) || [];
+
+        // Get the selected microorganism name
+        const selectedMicroorganismName = getMicroorganismName();
+
+        // Find the selected microorganism in the data
+        const selectedMicroorganism = microorganisms.find(microorganism => microorganism.name === selectedMicroorganismName);
+
+        if (selectedMicroorganism) {
+            // Display microorganism details
+            const detailsContainer = document.getElementById('microorganismDetails');
+            detailsContainer.innerHTML = `
+                <h2>${selectedMicroorganism.name}</h2>
+                <img src="${selectedMicroorganism.image}" alt="${selectedMicroorganism.name}">
+                <p><strong>Description:</strong> ${selectedMicroorganism.description}</p>
+                <p><strong>Date and Time:</strong> ${selectedMicroorganism.datetime}</p>
+                <p><strong>Location:</strong> ${selectedMicroorganism.location}</p>
+            `;
+        } else {
+            // Display a message if the microorganism is not found
+            const detailsContainer = document.getElementById('microorganismDetails');
+            detailsContainer.innerHTML = '<p>Microorganism not found.</p>';
+        }
+    </script>
+
+</body>
+</html>

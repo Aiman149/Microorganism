@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Microorganism</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <button onclick="window.location.href='index.html'">Add</button>
+        <button onclick="window.location.href='main.html'">View</button>
+        <button onclick="window.location.href='main.html'">Back</button>
+    </header>
+    <h1>Edit Microorganism</h1>
+
+    <form id="editMicroorganismForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" value="">
+
+        <label for="image">Image URL:</label>
+        <input type="url" id="image" value="" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" required></textarea>
+
+        <label for="datetime">Date and Time:</label>
+        <input type="datetime-local" id="datetime" required>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" required>
+
+        <button type="button" onclick="saveEditedMicroorganism()">Save Changes</button>
+    </form>
+
+    <script>
+        // Function to get the microorganism name from the URL parameter
+        function getMicroorganismName() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('name');
+        }
+
+        // Retrieve microorganism data from local storage
+        const microorganisms = JSON.parse(localStorage.getItem('microorganisms')) || [];
+
+        // Get the selected microorganism name
+        const selectedMicroorganismName = getMicroorganismName();
+
+        // Find the selected microorganism in the data
+        const selectedMicroorganism = microorganisms.find(microorganism => microorganism.name === selectedMicroorganismName);
+
+        // Populate form fields with existing data
+        if (selectedMicroorganism) {
+            document.getElementById('name').value = selectedMicroorganism.name;
+            document.getElementById('image').value = selectedMicroorganism.image;
+            document.getElementById('description').value = selectedMicroorganism.description;
+            document.getElementById('datetime').value = selectedMicroorganism.datetime;
+            document.getElementById('location').value = selectedMicroorganism.location;
+        }
+
+        // Function to save edited microorganism data
+        function saveEditedMicroorganism() {
+            const name = document.getElementById('name').value;
+            const image = document.getElementById('image').value;
+            const description = document.getElementById('description').value;
+            const datetime = document.getElementById('datetime').value;
+            const location = document.getElementById('location').value;
+
+            // Update the selected microorganism data
+            if (selectedMicroorganism) {
+                selectedMicroorganism.name = name;
+                selectedMicroorganism.image = image;
+                selectedMicroorganism.description = description;
+                selectedMicroorganism.datetime = datetime;
+                selectedMicroorganism.location = location;
+
+                // Update data in local storage
+                localStorage.setItem('microorganisms', JSON.stringify(microorganisms));
+
+                // Redirect to display.html with the updated microorganism name
+                window.location.href = `display.html?name=${encodeURIComponent(selectedMicroorganism.name)}`;
+            }
+        }
+    </script>
+
+</body>
+</html>

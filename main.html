@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microorganism Data</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <button onclick="window.location.href='index.html'">Add</button>
+        <button onclick="window.location.href='main.html'">View</button>
+    </header>
+    <h1>Microorganism Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Date and Time</th>
+                <th>Location</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="microorganismTableBody"></tbody>
+    </table>
+
+    <script>
+        // Retrieve microorganism data from local storage
+        const microorganisms = JSON.parse(localStorage.getItem('microorganisms')) || [];
+    
+        // Display microorganism data in the table
+        const tableBody = document.getElementById('microorganismTableBody');
+    
+        microorganisms.forEach(microorganism => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${microorganism.name}</td>
+                <td><img src="${microorganism.image}" alt="${microorganism.image}" style="max-width: 100px;"></td>
+                <td>${microorganism.description}</td>
+                <td>${microorganism.datetime}</td>
+                <td>${microorganism.location}</td>
+                <td class="action-buttons">
+                    <button onclick="displayDetails('${microorganism.name}')">Display</button>
+                    <button onclick="editData('${microorganism.name}')">Edit</button>
+                    <button onclick="deleteMicroorganism('${microorganism.name}')">Delete</button>
+                </td>
+            `;
+            tableBody.appendChild(row);
+        });
+    
+        // Function to navigate to display.html with the selected microorganism name
+        function displayDetails(name) {
+            window.location.href = `display.html?name=${encodeURIComponent(name)}`;
+        }
+    
+        // Function to navigate to edit.html with the selected microorganism name
+        function editData(name) {
+            window.location.href = `edit.html?name=${encodeURIComponent(name)}`;
+        }
+    
+        // Function to delete the selected microorganism
+        function deleteMicroorganism(name) {
+            // Find the index of the selected microorganism in the data
+            const selectedIndex = microorganisms.findIndex(microorganism => microorganism.name === name);
+    
+            // Remove the selected microorganism from the data
+            if (selectedIndex !== -1) {
+                microorganisms.splice(selectedIndex, 1);
+    
+                // Update data in local storage
+                localStorage.setItem('microorganisms', JSON.stringify(microorganisms));
+    
+                // Refresh the page to reflect the changes
+                location.reload();
+            }
+        }
+    </script>
+    
+
+</body>
+</html>

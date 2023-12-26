@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microorganism Information</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <button onclick="window.location.href='index.html'">Add</button>
+        <button onclick="window.location.href='main.html'">View</button>
+    </header>
+    <h1>Microorganism Information</h1>
+
+    <form id="microorganismForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="image">Image URL:</label>
+        <input type="url" id="image" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" required></textarea>
+
+        <label for="datetime">Date and Time:</label>
+        <input type="date" id="datetime" required>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" required>
+
+        <button type="button" onclick="saveMicroorganism()">Save</button>
+    </form>
+
+    <script>
+        function saveMicroorganism() {
+            const name = document.getElementById('name').value;
+            const image = document.getElementById('image').value;
+            const description = document.getElementById('description').value;
+            const datetime = document.getElementById('datetime').value;
+            const location = document.getElementById('location').value;
+
+            const microorganism = {
+                name,
+                image,
+                description,
+                datetime,
+                location
+            };
+
+            // Save data to local storage
+            let microorganisms = JSON.parse(localStorage.getItem('microorganisms')) || [];
+            microorganisms.push(microorganism);
+            localStorage.setItem('microorganisms', JSON.stringify(microorganisms));
+
+            // Clear form fields
+            document.getElementById('microorganismForm').reset();
+        }
+    </script>
+
+</body>
+</html>
