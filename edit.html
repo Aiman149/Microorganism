@@ -12,14 +12,13 @@
         <button onclick="window.location.href='main.html'">View</button>
         <button onclick="window.location.href='main.html'">Back</button>
     </header>
+    <center>
     <h1>Edit Microorganism</h1>
+</center>
 
     <form id="editMicroorganismForm">
         <label for="name">Name:</label>
         <input type="text" id="name" value="">
-
-        <label for="image">Image URL:</label>
-        <input type="url" id="image" value="" required>
 
         <label for="description">Description:</label>
         <textarea id="description" required></textarea>
@@ -52,7 +51,6 @@
         // Populate form fields with existing data
         if (selectedMicroorganism) {
             document.getElementById('name').value = selectedMicroorganism.name;
-            document.getElementById('image').value = selectedMicroorganism.image;
             document.getElementById('description').value = selectedMicroorganism.description;
             document.getElementById('datetime').value = selectedMicroorganism.datetime;
             document.getElementById('location').value = selectedMicroorganism.location;
@@ -61,7 +59,6 @@
         // Function to save edited microorganism data
         function saveEditedMicroorganism() {
             const name = document.getElementById('name').value;
-            const image = document.getElementById('image').value;
             const description = document.getElementById('description').value;
             const datetime = document.getElementById('datetime').value;
             const location = document.getElementById('location').value;
@@ -69,7 +66,6 @@
             // Update the selected microorganism data
             if (selectedMicroorganism) {
                 selectedMicroorganism.name = name;
-                selectedMicroorganism.image = image;
                 selectedMicroorganism.description = description;
                 selectedMicroorganism.datetime = datetime;
                 selectedMicroorganism.location = location;

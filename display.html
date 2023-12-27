@@ -12,9 +12,11 @@
         <button onclick="window.location.href='index.html'">Add</button>
         <button onclick="window.location.href='main.html'">View</button>
     </header>
+    <center>
     <h1>Microorganism Details</h1>
 
     <div id="microorganismDetails"></div>
+</center>
 
     <script>
         // Function to get the microorganism name from the URL parameter
@@ -37,7 +39,6 @@
             const detailsContainer = document.getElementById('microorganismDetails');
             detailsContainer.innerHTML = `
                 <h2>${selectedMicroorganism.name}</h2>
-                <img src="${selectedMicroorganism.image}" alt="${selectedMicroorganism.name}">
                 <p><strong>Description:</strong> ${selectedMicroorganism.description}</p>
                 <p><strong>Date and Time:</strong> ${selectedMicroorganism.datetime}</p>
                 <p><strong>Location:</strong> ${selectedMicroorganism.location}</p>

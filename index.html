@@ -11,14 +11,13 @@
         <button onclick="window.location.href='index.html'">Add</button>
         <button onclick="window.location.href='main.html'">View</button>
     </header>
+    <center>
     <h1>Microorganism Information</h1>
+</center>
 
     <form id="microorganismForm">
         <label for="name">Name:</label>
         <input type="text" id="name" required>
-
-        <label for="image">Image URL:</label>
-        <input type="url" id="image" required>
 
         <label for="description">Description:</label>
         <textarea id="description" required></textarea>
@@ -35,7 +34,6 @@
     <script>
         function saveMicroorganism() {
             const name = document.getElementById('name').value;
-            const image = document.getElementById('image').value;
             const description = document.getElementById('description').value;
             const datetime = document.getElementById('datetime').value;
             const location = document.getElementById('location').value;
@@ -56,6 +54,8 @@
             // Clear form fields
             document.getElementById('microorganismForm').reset();
         }
+
+        
     </script>
 
 </body>

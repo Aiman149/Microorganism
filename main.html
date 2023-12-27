@@ -11,14 +11,15 @@
         <button onclick="window.location.href='index.html'">Add</button>
         <button onclick="window.location.href='main.html'">View</button>
     </header>
+    <center>
     <h1>Microorganism Data</h1>
+</center>
     <table>
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Image</th>
                 <th>Description</th>
-                <th>Date and Time</th>
+                <th>Date Found</th>
                 <th>Location</th>
                 <th>Action</th>
             </tr>
@@ -37,12 +38,11 @@
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${microorganism.name}</td>
-                <td><img src="${microorganism.image}" alt="${microorganism.image}" style="max-width: 100px;"></td>
                 <td>${microorganism.description}</td>
                 <td>${microorganism.datetime}</td>
                 <td>${microorganism.location}</td>
                 <td class="action-buttons">
-                    <button onclick="displayDetails('${microorganism.name}')">Display</button>
+                    <button onclick="displayDetails('${microorganism.name}')">Details</button>
                     <button onclick="editData('${microorganism.name}')">Edit</button>
                     <button onclick="deleteMicroorganism('${microorganism.name}')">Delete</button>
                 </td>
