@@ -28,10 +28,7 @@
     </table>
 
     <script>
-        // Retrieve microorganism data from local storage
         const microorganisms = JSON.parse(localStorage.getItem('microorganisms')) || [];
-    
-        // Display microorganism data in the table
         const tableBody = document.getElementById('microorganismTableBody');
     
         microorganisms.forEach(microorganism => {
@@ -50,29 +47,22 @@
             tableBody.appendChild(row);
         });
     
-        // Function to navigate to display.html with the selected microorganism name
         function displayDetails(name) {
             window.location.href = `display.html?name=${encodeURIComponent(name)}`;
         }
     
-        // Function to navigate to edit.html with the selected microorganism name
         function editData(name) {
             window.location.href = `edit.html?name=${encodeURIComponent(name)}`;
         }
     
-        // Function to delete the selected microorganism
         function deleteMicroorganism(name) {
-            // Find the index of the selected microorganism in the data
             const selectedIndex = microorganisms.findIndex(microorganism => microorganism.name === name);
     
-            // Remove the selected microorganism from the data
             if (selectedIndex !== -1) {
                 microorganisms.splice(selectedIndex, 1);
     
-                // Update data in local storage
                 localStorage.setItem('microorganisms', JSON.stringify(microorganisms));
     
-                // Refresh the page to reflect the changes
                 location.reload();
             }
         }

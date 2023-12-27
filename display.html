@@ -19,23 +19,18 @@
 </center>
 
     <script>
-        // Function to get the microorganism name from the URL parameter
         function getMicroorganismName() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('name');
         }
 
-        // Retrieve microorganism data from local storage
         const microorganisms = JSON.parse(localStorage.getItem('microorganisms')) || [];
 
-        // Get the selected microorganism name
         const selectedMicroorganismName = getMicroorganismName();
 
-        // Find the selected microorganism in the data
         const selectedMicroorganism = microorganisms.find(microorganism => microorganism.name === selectedMicroorganismName);
 
         if (selectedMicroorganism) {
-            // Display microorganism details
             const detailsContainer = document.getElementById('microorganismDetails');
             detailsContainer.innerHTML = `
                 <h2>${selectedMicroorganism.name}</h2>
@@ -44,7 +39,6 @@
                 <p><strong>Location:</strong> ${selectedMicroorganism.location}</p>
             `;
         } else {
-            // Display a message if the microorganism is not found
             const detailsContainer = document.getElementById('microorganismDetails');
             detailsContainer.innerHTML = '<p>Microorganism not found.</p>';
         }

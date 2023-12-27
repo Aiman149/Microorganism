@@ -11,9 +11,10 @@
         <button onclick="window.location.href='index.html'">Add</button>
         <button onclick="window.location.href='main.html'">View</button>
     </header>
+
     <center>
-    <h1>Add Microorganism</h1>
-</center>
+        <h1>Add Microorganism</h1>
+    </center>
 
     <form id="microorganismForm">
         <label for="name">Name:</label>
@@ -31,6 +32,10 @@
         <button type="button" onclick="saveMicroorganism()">Save</button>
     </form>
 
+    <div id="successMessage" style="display: none; color: green; text-align: center; margin-top: 10px;">
+        Microorganism added successfully! <a href="main.html">Click this to see the data.</a>
+    </div>
+
     <script>
         function saveMicroorganism() {
             const name = document.getElementById('name').value;
@@ -38,25 +43,30 @@
             const datetime = document.getElementById('datetime').value;
             const location = document.getElementById('location').value;
 
-            const microorganism = {
-                name,
-                image,
-                description,
-                datetime,
-                location
-            };
+            if (name && description && datetime && location) {
+                const microorganism = {
+                    name,
+                    description,
+                    datetime,
+                    location
+                };
 
-            // Save data to local storage
-            let microorganisms = JSON.parse(localStorage.getItem('microorganisms')) || [];
-            microorganisms.push(microorganism);
-            localStorage.setItem('microorganisms', JSON.stringify(microorganisms));
+                let microorganisms = JSON.parse(localStorage.getItem('microorganisms')) || [];
+                microorganisms.push(microorganism);
+                localStorage.setItem('microorganisms', JSON.stringify(microorganisms));
 
-            // Clear form fields
-            document.getElementById('microorganismForm').reset();
+                document.getElementById('microorganismForm').reset();
+
+                const successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block';
+
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 10000);
+            } else {
+                alert('Please fill out all required fields.');
+            }
         }
-
-        
     </script>
-
 </body>
 </html>
